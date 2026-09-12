@@ -884,3 +884,38 @@ section {
   opacity: 1;
   transform: translateY(0);
 }
+.contact-email {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.contact-email-address {
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.contact-email button {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-small);
+    background-color: transparent;
+    color: var(--color-text);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition), color var(--transition);
+}
+
+.contact-email button:hover {
+    background-color: var(--color-text);
+    color: var(--color-background);
+}

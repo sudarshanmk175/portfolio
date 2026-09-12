@@ -65,3 +65,19 @@ const sectionObserver = new IntersectionObserver(
 sections.forEach((section) => {
     sectionObserver.observe(section);
 });
+const copyEmailButton = document.querySelector("#copy-email");
+const emailAddress = "sudarshanmk175@gmail.com";
+
+copyEmailButton.addEventListener("click", async () => {
+    try {
+        await navigator.clipboard.writeText(emailAddress);
+
+        copyEmailButton.textContent = "Copied!";
+
+        setTimeout(() => {
+            copyEmailButton.textContent = "Copy";
+        }, 2000);
+    } catch (error) {
+        copyEmailButton.textContent = "Copy failed";
+    }
+});
