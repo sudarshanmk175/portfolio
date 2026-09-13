@@ -33,18 +33,23 @@ themeToggle.addEventListener("click", () => {
   if (currentTheme === "dark") {
     document.documentElement.removeAttribute("data-theme");
     localStorage.setItem("theme", "light");
-    themeToggle.textContent = "◐";
+    themeToggle.textContent = "☾";
+    themeToggle.setAttribute("aria-label", "Switch to dark mode");
   } else {
     document.documentElement.setAttribute("data-theme", "dark");
     localStorage.setItem("theme", "dark");
-    themeToggle.textContent = "◑";
+    themeToggle.textContent = "☀";
+    themeToggle.setAttribute("aria-label", "Switch to light mode");
   }
 });
 const savedTheme = localStorage.getItem("theme");
 
 if (savedTheme === "dark") {
-  document.documentElement.setAttribute("data-theme", "dark");
-  themeToggle.textContent = "◑";
+    document.documentElement.setAttribute("data-theme", "dark");
+    themeToggle.textContent = "☀";
+    themeToggle.setAttribute("aria-label", "Switch to light mode");
+} else {
+    themeToggle.setAttribute("aria-label", "Switch to dark mode");
 }
 const sections = document.querySelectorAll(".section");
 
@@ -66,18 +71,53 @@ sections.forEach((section) => {
     sectionObserver.observe(section);
 });
 const copyEmailButton = document.querySelector("#copy-email");
-const emailAddress = "sudarshanmk175@gmail.com";
 
-copyEmailButton.addEventListener("click", async () => {
-    try {
-        await navigator.clipboard.writeText(emailAddress);
+if (copyEmailButton) {
+    copyEmailButton.addEventListener("click", async () => {
+        const emailAddress = "sudarshanmk175@gmail.com";
 
-        copyEmailButton.textContent = "Copied!";
+        try {
+            await navigator.clipboard.writeText(emailAddress);
 
-        setTimeout(() => {
-            copyEmailButton.textContent = "Copy";
-        }, 2000);
-    } catch (error) {
-        copyEmailButton.textContent = "Copy failed";
+            copyEmailButton.textContent = "Copied!";
+
+            setTimeout(() => {
+                copyEmailButton.textContent = "Copy";
+            }, 2000);
+        } catch (error) {
+            copyEmailButton.textContent = "Copy failed";
+            console.error("Could not copy email:", error);
+        }
+    });
+}
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+        navMenu.classList.remove("active");
+
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+        menuToggle.textContent = "☰";
+    }
+});
+document.addEventListener("click", (event) => {
+    if (
+        navMenu.classList.contains("active") &&
+        !navMenu.contains(event.target) &&
+        !menuToggle.contains(event.target)
+    ) {
+        navMenu.classList.remove("active");
+
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+        menuToggle.textContent = "☰";
+    }
+});
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && navMenu.classList.contains("active")) {
+        navMenu.classList.remove("active");
+
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+        menuToggle.textContent = "☰";
     }
 });
