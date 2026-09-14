@@ -27,6 +27,7 @@ experience, achievements, certifications, and contact information.
 
 ## 📁 Project Structure
 
+```text
 portfolio/
 ├── index.html
 ├── css/
@@ -36,6 +37,7 @@ portfolio/
 └── assets/
     ├── images/
     └── resume/
+```
 
 ## 👨‍💻 Author
 
